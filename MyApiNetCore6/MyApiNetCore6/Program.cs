@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyApiNetCore6.Data;
+using MyApiNetCore6.Repositorys;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,12 @@ builder.Services.AddDbContext<BookStoreContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore"));
 });
+
+//Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+
+//DI
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
