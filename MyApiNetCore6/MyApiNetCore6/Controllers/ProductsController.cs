@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyApiNetCore6.Models;
 using MyApiNetCore6.Repositorys;
@@ -36,6 +37,7 @@ namespace MyApiNetCore6.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddNewBook(BookModel model)
         {
             try
@@ -51,6 +53,7 @@ namespace MyApiNetCore6.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateBook(int id, BookModel model)
         {
             if (id != model.Id)
